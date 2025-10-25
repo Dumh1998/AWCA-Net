@@ -1,25 +1,6 @@
 
 # AWCA-Net
 
-## Data Structure
-
-The data is organized as follows:
-
-```
-train
-├─ train/A        # Images of t1 phase
-├─ train/B        # Images of t2 phase
-└─ train/label    # Label maps
-
-test
-├─ test/A         # Images of t1 phase (for testing)
-├─ test/B         # Images of t2 phase (for testing)
-└─ test/label     # Label maps (for testing)
-```
-
-- **A**: Images for the t1 phase.
-- **B**: Images for the t2 phase.
-- **label**: Corresponding label maps for both training and testing.
 
 ## Training
 
