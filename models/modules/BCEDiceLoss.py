@@ -1,5 +1,7 @@
 import torch.nn.functional as F
 
+# BCEDiceLoss1 + BCEDiceLoss2 + BCEDiceLoss3 + BCEDiceLoss4
+
 def BCEDiceLoss(inputs, targets):
     bce = F.binary_cross_entropy(inputs, targets)
     inter = (inputs * targets).sum()
