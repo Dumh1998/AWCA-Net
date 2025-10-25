@@ -6,7 +6,7 @@ import torch.utils.data
 
 
 class Dataset(torch.utils.data.Dataset):
-    def __init__(self, file_root='E:\dl\dataset/NEWS1GFloods', mode='test', transform=None):
+    def __init__(self, file_root='dir', mode='test', transform=None):
         self.file_list = os.listdir(osp(file_root, mode, 'A'))
 
         self.pre_images = [osp(file_root, mode, 'A', x) for x in self.file_list]
@@ -41,7 +41,3 @@ class Dataset(torch.utils.data.Dataset):
         img = cv2.imread(self.pre_images[idx])
         return {"height": img.shape[0], "width": img.shape[1]}
 
-if __name__ == '__main__':
-    dataset = Dataset()
-    print(dataset[0][0])
-    print(dataset[0][1])
