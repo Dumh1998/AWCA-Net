@@ -1,47 +1,34 @@
 import logging
 logging.getLogger().setLevel(logging.WARNING)
 import sys
-import torch.nn as nn
 from utils.model_builder import build_model
-
-sys.path.insert(0, '')
-
 import torch
 import torch.backends.cudnn as cudnn
 from torch.nn.parallel import gather
-import torch.optim.lr_scheduler
-
 import dataset.dataset as myDataLoader
 import dataset.Transforms as myTransforms
 from utils.metric_tool import ConfuseMatrixMeter
-from utils.utils import BCEDiceLoss, init_seed, adjust_learning_rate, DiceLoss
-
+from utils.utils import BCEDiceLoss, init_seed, adjust_learning_rate
 import os, time
 import numpy as np
 from argparse import ArgumentParser
-from torch.nn.modules.loss import BCEWithLogitsLoss
 
-
+sys.path.insert(0, '')
 
 
 @torch.no_grad()
 def val(args, val_loader, model):
     model.eval()
     salEvalVal = ConfuseMatrixMeter(n_class=2)
-
     epoch_loss = []
-
     total_batches = len(val_loader)
     print(len(val_loader))
     for iter, batched_inputs in enumerate(val_loader):
         loss = 0.0
-
         img, target, name = batched_inputs
         pre_img = img[:, 0:3]
         post_img = img[:, 3:6]
-
         start_time = time.time()
-
         if args.onGPU == True:
             pre_img = pre_img.cuda()
             target = target.cuda()
@@ -60,15 +47,12 @@ def val(args, val_loader, model):
         loss = l1 + l2 + l3 + l4
         pred = torch.where(p1 > 0.5, torch.ones_like(p1), torch.zeros_like(p1)).long()
 
-        # torch.cuda.synchronize()
         time_taken = time.time() - start_time
 
         epoch_loss.append(loss.data.item())
 
-        # compute the confusion matrix
         if args.onGPU and torch.cuda.device_count() > 1:
             output = gather(pred, 0, dim=0)
-        # salEvalVal.addBatch(pred, target_var)
         f1 = salEvalVal.update_cm(pr=pred.cpu().numpy(), gt=target_var.cpu().numpy())
         if iter % 5 == 0:
             print('\r[%d/%d] F1: %3f loss: %.3f time: %.3f' % (iter, total_batches, f1, loss.data.item(), time_taken),
@@ -82,50 +66,33 @@ def val(args, val_loader, model):
 
 def train(args, train_loader, model, optimizer, epoch, max_batches, cur_iter=0, lr_factor=1.):
     model.train()
-
     salEvalVal = ConfuseMatrixMeter(n_class=2)
     epoch_loss = []
-
-
     for iter, batched_inputs in enumerate(train_loader):
         loss = 0.0
-
         img, target, name = batched_inputs
         pre_img = img[:, 0:3]
         post_img = img[:, 3:6]
-
         start_time = time.time()
-
-        # adjust the learning rate
         lr = adjust_learning_rate(args, optimizer, epoch, iter + cur_iter, max_batches, lr_factor=lr_factor)
-
         if args.onGPU == True:
             pre_img = pre_img.cuda()
             target = target.cuda()
             post_img = post_img.cuda()
-
         pre_img_var = torch.autograd.Variable(pre_img).float()
         post_img_var = torch.autograd.Variable(post_img).float()
         target_var = torch.autograd.Variable(target).float()
-
-        # run the models
         output = model(pre_img_var, post_img_var)
         p4,p3,p2,p1 = output
-        # outputs = output
-        # # ----------------------------------
-        # --------------------------------------------------
         l1 = BCEDiceLoss(p1, target_var)
         l2 = BCEDiceLoss(p2, target_var)
         l3 = BCEDiceLoss(p3, target_var)
         l4 = BCEDiceLoss(p4, target_var)
         loss = l1 + l2 + l3 + l4
         pred = torch.where(p1 > 0.5, torch.ones_like(p1), torch.zeros_like(p1)).long()
-
-
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-
         epoch_loss.append(loss.data.item())
         time_taken = time.time() - start_time
         res_time = (max_batches * args.max_epochs - iter - cur_iter) * time_taken / 3600
@@ -133,7 +100,6 @@ def train(args, train_loader, model, optimizer, epoch, max_batches, cur_iter=0, 
         if args.onGPU and torch.cuda.device_count() > 1:
             output = gather(pred, 0, dim=0)
 
-        # Computing F-measure and IoU on GPU
         with torch.no_grad():
             f1 = salEvalVal.update_cm(pr=pred.cpu().numpy(), gt=target_var.cpu().numpy())
 
@@ -149,12 +115,9 @@ def train(args, train_loader, model, optimizer, epoch, max_batches, cur_iter=0, 
     return average_epoch_loss_train, scores, lr
 
 
-def trainValidateSegmentation(args):
-
+def trainVal(args):
     torch.backends.cudnn.benchmark = True
-
     init_seed(args.seed)
-
     args.savedir = args.savedir + args.model_name + '_' + args.file_root + '_iter_' + str(args.max_steps) + '_lr_' + str(args.lr) + '/'
     
     if args.file_root == 'xxx':
@@ -162,14 +125,11 @@ def trainValidateSegmentation(args):
     elif args.file_root == 'xxxx':
         args.file_root = 'xxx'
 
-
     else:
         raise TypeError('%s has not defined' % args.file_root)
-    
 
     if not os.path.exists(args.savedir):
         os.makedirs(args.savedir)
-
 
     model = build_model(args.model_name)
     if args.onGPU:
@@ -178,7 +138,6 @@ def trainValidateSegmentation(args):
     mean = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
     std = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 
-    # compose the data with transforms
     trainDataset_main = myTransforms.Compose([
         myTransforms.Normalize(mean=mean, std=std),
         myTransforms.Scale(args.inWidth, args.inHeight),
@@ -195,27 +154,22 @@ def trainValidateSegmentation(args):
     ])
 
     train_data = myDataLoader.Dataset(file_root=args.file_root, mode="train", transform=trainDataset_main)
-
     trainLoader = torch.utils.data.DataLoader(
         train_data,
         batch_size=args.batch_size, shuffle=True,
         num_workers=args.num_workers, pin_memory=True, drop_last=False
     )
-
     test_data = myDataLoader.Dataset(file_root=args.file_root, mode="test", transform=valDataset)
     testLoader = torch.utils.data.DataLoader(
         test_data, shuffle=False,
         batch_size=args.batch_size, num_workers=args.num_workers, pin_memory=True)
 
-
     max_batches = len(trainLoader)
-    print('For each epoch, we have {} batches'.format(max_batches))
 
     if args.onGPU:
         cudnn.benchmark = True
 
     args.max_epochs = int(np.ceil(args.max_steps / max_batches))
-    print('we have {} epoch'.format(args.max_epochs))
     start_epoch = 0
     cur_iter = 0
     max_F1_val = 0
@@ -251,7 +205,6 @@ def trainValidateSegmentation(args):
 
         torch.cuda.empty_cache()
 
-        # evaluate on validation set
         if epoch == 0:
             continue
 
@@ -274,7 +227,6 @@ def trainValidateSegmentation(args):
             'lr': lr
         }, args.savedir + 'checkpoint.pth.tar')
 
-        # save the models also
         model_file_name = args.savedir + 'best_model.pth'
         if epoch % 1 == 0 and max_F1_val <= score_val['F1']:
             max_F1_val = score_val['F1']
@@ -299,12 +251,11 @@ def trainValidateSegmentation(args):
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument('--model_name', default="AWCANet", help='')
-    parser.add_argument('--file_root', default="S1G", help='Data directory')
+    parser.add_argument('--file_root', default="Data", help='Data directory')
     parser.add_argument('--inWidth', type=int, default=256, help='Width of RGB image')
     parser.add_argument('--inHeight', type=int, default=256, help='Height of RGB image')
-    parser.add_argument('--max_steps', type=int, default=20100, help='Max. number of iterations')
+    parser.add_argument('--max_steps', type=int, default=20000, help='Max. number of iterations')
     parser.add_argument('--num_workers', type=int, default=4, help='No. of parallel threads')
-    parser.add_argument('--model_type', type=str, default='small', help='select vit models type | tiny | small')
     parser.add_argument('--batch_size', type=int, default=16, help='Batch size')
     parser.add_argument('--step_loss', type=int, default=100, help='Decrease learning rate after how many epochs')
     parser.add_argument('--lr', type=float, default=0.0002, help='Initial learning rate')
@@ -323,6 +274,6 @@ def parse_args():
     return args
 
 if __name__ == '__main__':
-    trainValidateSegmentation(parse_args())
+    trainVal(parse_args())
 
 
