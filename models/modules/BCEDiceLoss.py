@@ -1,5 +1,6 @@
 import torch.nn.functional as F
 
+# Multi-Scale BCEDice Loss
 # BCEDiceLoss1 + BCEDiceLoss2 + BCEDiceLoss3 + BCEDiceLoss4
 
 def BCEDiceLoss(inputs, targets):

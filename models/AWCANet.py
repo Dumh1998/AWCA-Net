@@ -54,10 +54,10 @@ class Decoder(nn.Module):
         self.conv_2 = BasicConv2d(channels[2], channels[2], 3, 1, 1)
         self.conv_1 = BasicConv2d(channels[3], channels[3], 3, 1, 1)
 
-        self.out_head4 = nn.Conv2d(channels[0], num_classes, 1)
-        self.out_head3 = nn.Conv2d(channels[1], num_classes, 1)
-        self.out_head2 = nn.Conv2d(channels[2], num_classes, 1)
-        self.out_head1 = nn.Conv2d(channels[3], num_classes, 1)
+        self.FRH4 = nn.Conv2d(channels[0], num_classes, 1)
+        self.FRH3 = nn.Conv2d(channels[1], num_classes, 1)
+        self.FRH2 = nn.Conv2d(channels[2], num_classes, 1)
+        self.FRH1 = nn.Conv2d(channels[3], num_classes, 1)
         
         self.LM = MSAWM(channels=channels, kernel_sizes=[1,3,5], expansion_factor=6,
                              dw_parallel=True, add=True, lgag_ks=3, activation='relu6')
@@ -74,10 +74,10 @@ class Decoder(nn.Module):
         layer_4 = self.conv_4(self.conv4((torch.cat((pvt_a4, pvt_b4), dim=1))))
         outs = self.LM(layer_4, [layer_3, layer_2, layer_1])
 
-        u4 = self.out_head4(outs[0])
-        u3 = self.out_head3(outs[1])
-        u2 = self.out_head2(outs[2])
-        u1 = self.out_head1(outs[3])
+        u4 = self.FRH4(outs[0])
+        u3 = self.FRH3(outs[1])
+        u2 = self.FRH2(outs[2])
+        u1 = self.FRH1(outs[3])
 
         u4 = F.interpolate(u4, scale_factor=32, mode='bilinear')
         u3 = F.interpolate(u3, scale_factor=16, mode='bilinear')
