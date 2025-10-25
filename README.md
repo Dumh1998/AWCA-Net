@@ -1,6 +1,6 @@
-![Figure3](https://github.com/user-attachments/assets/b72b81f6-6960-43fd-a072-164f0cf4c628)
 
 # AWCA-Net
+![Figure3](https://github.com/user-attachments/assets/b72b81f6-6960-43fd-a072-164f0cf4c628)
 
 
 ## Training
