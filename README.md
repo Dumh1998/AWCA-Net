@@ -13,8 +13,34 @@
 We constructed the first enriched-diverse benchmark dataset for flood change detection (VarFloods).
 You can download it from the following links:- **(https://pan.baidu.com/s/1K4ViWlGqmX1rYzoRwGhupQ?pwd=2wps)**
 
-## Data Preparation
-You can use clip.py to clip the dataset for your study!
+## Data Structure
+
+Please prepare the dataset in the following structure:
+
+```
+├── Train
+│   ├── t1
+│   │   └── jpg/png (input image of T1)
+│   ├── t2
+│   │   └── jpg/png (input image of T2)
+│   └── label
+│       └── jpg/png (binary change mask)
+├── Val
+│   ├── t1
+│   │   └── jpg/png (input image of T1)
+│   ├── t2
+│   │   └── jpg/png (input image of T2)
+│   └── label
+│       └── jpg/png (binary change mask)
+├── Test
+│   ├── t1
+│   │   └── jpg/png (input image of T1)
+│   ├── t2
+│   │   └── jpg/png (input image of T2)
+│   └── label
+│       └── jpg/png (binary change mask)
+```
+
 
 ## Training
 
