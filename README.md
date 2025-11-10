@@ -20,25 +20,25 @@ Please prepare the dataset in the following structure:
 ```
 ├── Train
 │   ├── t1
-│   │   └── jpg/png (input image of T1)
+│   │   └── tif/png (input image of T1)
 │   ├── t2
-│   │   └── jpg/png (input image of T2)
+│   │   └── tif/png (input image of T2)
 │   └── label
-│       └── jpg/png (binary change mask)
+│       └── tif/png (binary change mask)
 ├── Val
 │   ├── t1
-│   │   └── jpg/png (input image of T1)
+│   │   └── tif/png (input image of T1)
 │   ├── t2
-│   │   └── jpg/png (input image of T2)
+│   │   └── tif/png (input image of T2)
 │   └── label
-│       └── jpg/png (binary change mask)
+│       └── tif/png (binary change mask)
 ├── Test
 │   ├── t1
-│   │   └── jpg/png (input image of T1)
+│   │   └── tif/png (input image of T1)
 │   ├── t2
-│   │   └── jpg/png (input image of T2)
+│   │   └── tif/png (input image of T2)
 │   └── label
-│       └── jpg/png (binary change mask)
+│       └── tif/png (binary change mask)
 ```
 
 
