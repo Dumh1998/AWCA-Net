@@ -1,8 +1,8 @@
 # Overview
 
-We are delighted to share that our paper, **"High-precision Flood Change Detection with Lightweight SAR Transformer Network and Context-aware Attention for Enriched-diverse and Complex Flooding Scenarios"**, has been successfully accepted by the **ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS 2026)**. 
+We are delighted to share that our paper, **"High-precision Flood Change Detection with Lightweight SAR Transformer Network and Context-aware Attention for Enriched-diverse and Complex Flooding Scenarios"**, has been successfully accepted by the **ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS 2026)**! 🎉🎉🎉
 
-**We have officially released our code and dataset for public access**
+**We have officially released our code and dataset for public access**!🔥🔥🔥
 
 
 ## AWCA-Net
