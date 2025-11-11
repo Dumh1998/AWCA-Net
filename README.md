@@ -11,7 +11,7 @@
 
 ## Dataset
 We constructed the first enriched-diverse benchmark dataset for flood change detection (VarFloods).
-You can download it from the following links:- **(https://pan.baidu.com/s/1NwpvAfhpxpkRgKcf8x0PRw?pwd=idhi 提取码: idhi)**
+You can download it from the following links:- **(https://pan.baidu.com/s/1NwpvAfhpxpkRgKcf8x0PRw?pwd=idhi)**
 
 ## Data Structure
 
