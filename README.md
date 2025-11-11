@@ -1,8 +1,8 @@
 ## Overview
 
-**[2025-11-07]** We are delighted to share that our paper, **"High-precision Flood Change Detection with Lightweight SAR Transformer Network and Context-aware Attention for Enriched-diverse and Complex Flooding Scenarios"**, has been successfully accepted by the **ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS 2026)!** 🎉🎉🎉
+**[2025-11-07]**  We are delighted to share that our paper, **"High-precision Flood Change Detection with Lightweight SAR Transformer Network and Context-aware Attention for Enriched-diverse and Complex Flooding Scenarios"**, has been successfully accepted by the **ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS 2026)!** 🎉🎉🎉
 
-**[2025-11-10]** **We have officially released our code and dataset for public access**.🔥🔥🔥
+**[2025-11-10]**  **We have officially released our code and dataset for public access**.🔥🔥🔥
 
 
 ## AWCA-Net
@@ -11,7 +11,7 @@
 
 ## Dataset
 We constructed the first enriched-diverse benchmark dataset for flood change detection (VarFloods).
-You can download it from the following links:- **(https://pan.baidu.com/s/1K4ViWlGqmX1rYzoRwGhupQ?pwd=2wps)**
+You can download it from the following links:- **(https://pan.baidu.com/s/1NwpvAfhpxpkRgKcf8x0PRw?pwd=idhi 提取码: idhi)**
 
 ## Data Structure
 
