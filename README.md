@@ -42,39 +42,16 @@ Please prepare the dataset in the following structure:
 ```
 
 
-## Training
+## Citation
+**If you find our work useful, please consider citing our paper:**
 
-To train the model, run the following command:
-
-```bash
-CUDA_VISIBLE_DEVICES='GPUID' python main.py   --model_name=AWCANet   --file_root='./file/data'   --batch_size=16   --img_size=256   --max_steps=20000
-```
-
-### Arguments:
-- `--model_name`: Specifies the model architecture to use (in this case, AWCA-Net).
-- `--file_root`: Path to the dataset root directory.
-- `--batch_size`: Batch size for training.
-- `--img_size`: Image size for input images.
-- `--max_steps`: Number of training steps.
-
-## Evaluation
-
-To evaluate the model, use the following command:
-
-```bash
-CUDA_VISIBLE_DEVICES='GPUID' python eval.py
-```
-
-### Notes:
-- This will run the evaluation using the pre-trained model on the test set.
-
-## Prediction
-
-To make predictions, execute the following:
-
-```bash
-CUDA_VISIBLE_DEVICES='GPUID' python evalvis.py
-```
-
-### Notes:
-- This will generate visual results of the predictions for your input data.
+@article{DU2026507,
+author = {Menghao Du and Zhenfeng Shao and Xiongwu Xiao and Jindou Zhang and Duowang Zhu and Jinyang Wang and Timo Balz and Deren Li},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+title = {High-precision flood change detection with lightweight SAR transformer network and context-aware attention for enriched-diverse and complex flooding scenarios},
+year = {2026},
+volume = {231},
+pages = {507-531},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2025.11.011},
+}
