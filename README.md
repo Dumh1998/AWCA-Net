@@ -2,7 +2,7 @@
 
 **[2025-11-07]**  We are delighted to share that our paper, **"High-precision Flood Change Detection with Lightweight SAR Transformer Network and Context-aware Attention for Enriched-diverse and Complex Flooding Scenarios"**, has been successfully accepted by the **ISPRS Journal of Photogrammetry and Remote Sensing (ISPRS 2026)!** 🎉🎉🎉
 
-**[2025-11-10]**  **We have officially released our code and dataset for public access**.🔥🔥🔥
+**[2025-11-10]**  **We have officially released our core code and dataset for public access**.🔥🔥🔥
 
 
 ## AWCA-Net
@@ -47,7 +47,7 @@ Please prepare the dataset in the following structure:
 
 ```bibtex
 @article{DU2026507,
-    author = {Menghao Du and Zhenfeng Shao and Xiongwu Xiao and Jindou Zhang and Duowang Zhu and Jinyang Wang and Timo Balz and Deren Li},
+    author = {Menghao Du, Zhenfeng Shao, Xiongwu Xiao, Jindou Zhang, Duowang Zhu, Jinyang Wang, Timo Balz and Deren Li},
     journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
     title = {High-precision flood change detection with lightweight SAR transformer network and context-aware attention for enriched-diverse and complex flooding scenarios},
     year = {2026},
@@ -55,4 +55,5 @@ Please prepare the dataset in the following structure:
     pages = {507-531},
     issn = {0924-2716},
     doi = {https://doi.org/10.1016/j.isprsjprs.2025.11.011},
+    keywords = {High-precision flood change detection, Context-aware attention, Adaptive window selection, Diverse flood scenarios, VarFloods dataset, Synthetic aperture radar (SAR)}
 }
