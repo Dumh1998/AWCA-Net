@@ -54,6 +54,6 @@ Please prepare the dataset in the following structure:
     volume = {231},
     pages = {507-531},
     issn = {0924-2716},
-    doi = {https://doi.org/10.1016/j.isprsjprs.2025.11.011},
-    keywords = {High-precision flood change detection, Context-aware attention, Adaptive window selection, Diverse flood scenarios, VarFloods dataset, Synthetic aperture radar (SAR)}
+    keywords = {High-precision flood change detection, Context-aware attention, Adaptive window selection, Diverse flood scenarios, VarFloods dataset, Synthetic aperture radar (SAR)},
+    doi = {https://doi.org/10.1016/j.isprsjprs.2025.11.011}
 }
