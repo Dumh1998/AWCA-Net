@@ -46,6 +46,9 @@ Please prepare the dataset in the following structure:
 **If you find our work useful, please consider citing our paper:**
 
 ```bibtex
+**Word:**
+Du M, Shao Z, Xiao X, et al. High-precision flood change detection with lightweight SAR transformer network and context-aware attention for enriched-diverse and complex flooding scenarios[J]. ISPRS Journal of Photogrammetry and Remote Sensing, 2026, 231: 507-531.
+**LaTeX:**
 @article{DU2026507,
     author = {Du, Menghao and Shao, Zhenfeng and Xiao, Xiongwu and Zhang, Jindou and Zhu, Duowang and Wang, Jinyang and Balz, Timo and Li, Deren},
     journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
