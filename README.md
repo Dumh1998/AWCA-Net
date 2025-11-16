@@ -47,12 +47,12 @@ Please prepare the dataset in the following structure:
 
 ```bibtex
 @article{DU2026507,
-    author = {Menghao Du, Zhenfeng Shao, Xiongwu Xiao, Jindou Zhang, Duowang Zhu, Jinyang Wang, Timo Balz and Deren Li},
+    author = {Du, Menghao and Shao, Zhenfeng and Xiao, Xiongwu and Zhang, Jindou and Zhu, Duowang and Wang, Jinyang and Balz, Timo and Li, Deren},
     journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
     title = {High-precision flood change detection with lightweight SAR transformer network and context-aware attention for enriched-diverse and complex flooding scenarios},
     year = {2026},
     volume = {231},
-    pages = {507-531},
+    pages={507--531},
     issn = {0924-2716},
     keywords = {High-precision flood change detection, Context-aware attention, Adaptive window selection, Diverse flood scenarios, VarFloods dataset, Synthetic aperture radar (SAR)},
     doi = {https://doi.org/10.1016/j.isprsjprs.2025.11.011}
